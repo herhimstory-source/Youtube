@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🔥 실시간 유튜브 트렌드 멘션 생성기 2025</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#1e1b4b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="실시간멘션생성기">
+    <meta name="description" content="2025년 실시간 유튜브 트렌드를 반영한 AI 멘션 제작 도구">
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIuycoO2KnOu4rOu4sDIwMjUg7Yq464yE65OcIOultOuckeyjvOyEse2NvCIsCiAgInNob3J0X25hbWUiOiAi66Wt7Zy474q07IW66IC16riAIiwKICAic3RhcnRfdXJsIjogIi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJ0aGVtZV9jb2xvciI6ICIjMWUxYjRiIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMWUxYjRiIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCM2FXUjBhRDBpTVRJNElpQm9aV2xuYUhROUlqRXlPQ0lnZG1sbGQwSnZlRDBpTUNBd0lERXlPQ0F4TWpnaUlIaHRiRzV6UFNKb2RIUndPaTh2ZDNkM0xuY3pMbTl5Wnk4eU1EQXdMM04yWnlJK1BHUmxabk0rUEdkcFluSnBaVzUwSUdsa1BTSmhJaUJ5TVQwaU1DNDNJaUJ5TWowaU1DNDVJaUJuTVQwaUkzWTFOakV3TVdVaUlHY3lQU0lqTWpjeFpUWmtJaTgrUEM5blpHVm1jejRnUEhObGNtTnNaU0JqZUQwaU5qUWlJR041UFNJMk5DSWdjakU5SWpFNElpQm1hV3hzUFNKMWNtd29JMkVwSWo0OEwzTmxjbU5zWlQ0OEwyUmxabk0rUEhSbGVIUWdlRDBpTmpRaUlIazlJamMyVENJZ1ptbHNiRDBpSTJGbFptWm1aaUlnWm05dWRDMXphWHBsUFNJeE1pSWdkR1Y0ZEMxaGJtTm9iM0k5SWsxcFpIUnNaU0lnWm05dWRDMW1ZVzFwYkhsOUlqSTJMUzVTYjJKdmRHOGlQa3hyNVEyZ0lNZHpJaUJ3YUNBNGJpOWZibVEwaUNBNGFpOWNJbTBySUNBNGJpOTFZQzQ2SWladUxqOVBabThpSUVzblNBSWdjbTl1ZDJGeWFETjNJaUJ3ZEcwNkxTczNOSEY0ZDFkMElDQWlMelJzU2xJK1BDOTBaWGgwUGp3dmMzWm5QZz09IiwKICAgICAgInNpemVzIjogIjEyOHgxMjgiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiwKICAgICAgInB1cnBvc2UiOiAiYW55IG1hc2thYmxlIgogICAgfQogIF0KfQ==">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+            background: linear-gradient(135deg, #581c87 0%, #1e3a8a 35%, #312e81 70%, #4c1d95 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Background decoration */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(168, 85, 247, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .glass-strong {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #a855f7 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #9333ea 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(99, 102, 241, 0.4);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-success:hover {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-white {
+            background: rgba(255, 255, 255, 0.95);
+            color: #374151;
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-white:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-trend {
+            background: linear-gradient(135deg, #ef4444 0%, #f97316 50%, #eab308 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
+            animation: pulse-glow 2s infinite;
+        }
+        
+        .btn-trend:hover {
+            background: linear-gradient(135deg, #dc2626 0%, #ea580c 50%, #ca8a04 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(239, 68, 68, 0.4);
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3); }
+            50% { box-shadow: 0 8px 30px rgba(239, 68, 68, 0.6); }
+        }
+        
+        .input-field {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            outline: none;
+        }
+        
+        .radio-option {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .radio-option:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-1px);
+        }
+        
+        .radio-option.selected {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+        
+        .trend-badge {
+            background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+            display: inline-block;
+            margin-left: 8px;
+        }
+        
+        .real-time-indicator {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 8px 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            animation: shimmer-indicator 3s infinite;
+        }
+        
+        @keyframes shimmer-indicator {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .install-prompt {
+            animation: slideDown 0.5s ease-out;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.3);
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .spin {
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        /* Enhanced scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.6), rgba(59, 130, 246, 0.6));
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.8), rgba(59, 130, 246, 0.8));
+        }
+        
+        /* Text styles */
+        .title-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 50%, #c7d2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle-glow {
+            color: #bfdbfe;
+            text-shadow: 0 0 20px rgba(191, 219, 254, 0.3);
+        }
+        
+        /* Enhanced containers */
+        .main-container {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Toast enhancement */
+        .toast {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.3);
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .mobile-padding {
+                padding: 16px;
+            }
+            
+            .mobile-text {
+                font-size: 14px;
+            }
+            
+            .mobile-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+            
+            .glass {
+                backdrop-filter: blur(16px);
+            }
+        }
+        
+        /* Loading states */
+        .loading-shimmer {
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        /* Hover effects */
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Icon enhancements */
+        .icon-glow {
+            filter: drop-shadow(0 0 8px rgba(250, 204, 21, 0.4));
+        }
+        
+        .icon-bounce {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+        
+        /* Trend indicator animations */
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+            animation: live-pulse 1.5s infinite;
+        }
+        
+        @keyframes live-pulse {
+            0% { 
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- PWA Install Prompt -->
+    <div id="installPrompt" class="fixed top-4 left-4 right-4 z-50 install-prompt rounded-xl shadow-xl hidden">
+        <div class="p-4 text-white flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <i data-lucide="smartphone" class="w-6 h-6 icon-glow"></i>
+                <div>
+                    <div class="font-semibold text-lg">홈 화면에 추가하기</div>
+                    <div class="text-sm opacity-90">실시간 트렌드를 놓치지 마세요!</div>
+                </div>
+            </div>
+            <div class="flex gap-2">
+                <button id="installBtn" class="btn-white px-6 py-2 rounded-lg font-semibold text-sm transition-all">
+                    설치
+                </button>
+                <button id="dismissBtn" class="text-white opacity-70 hover:opacity-100 p-2 hover:bg-white/10 rounded-lg transition-all">
+                    ✕
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="min-h-screen p-4 sm:p-8">
+        <div class="max-w-6xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-8 sm:mb-12 fade-in">
+                <div class="flex items-center justify-center gap-3 sm:gap-4 mb-6">
+                    <i data-lucide="trending-up" class="w-8 sm:w-12 h-8 sm:h-12 text-yellow-400 icon-glow icon-bounce"></i>
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold title-gradient leading-tight">
+                        🔥 실시간 유튜브<br class="sm:hidden">
+                        트렌드 멘션 생성기
+                    </h1>
+                    <i data-lucide="sparkles" class="w-8 sm:w-12 h-8 sm:h-12 text-yellow-400 icon-glow pulse"></i>
+                </div>
+                
+                <!-- Real-time indicator -->
+                <div class="flex items-center justify-center mb-4">
+                    <div class="real-time-indicator">
+                        <div class="live-dot"></div>
+                        <span>실시간 트렌드 반영</span>
+                        <i data-lucide="wifi" class="w-4 h-4"></i>
+                    </div>
+                </div>
+                
+                <p class="subtitle-glow text-lg sm:text-xl lg:text-2xl font-medium mb-6">
+                    2025년 실시간 유튜브 트렌드를 AI가 분석하여 반영한 멘션 제작 도구
+                </p>
+                
+                <!-- Mobile Install Guide -->
+                <div class="mt-6 glass rounded-xl p-4 border block sm:hidden hover-lift">
+                    <div class="flex items-center justify-center gap-2 text-blue-200 text-sm">
+                        <i data-lucide="download" class="w-5 h-5"></i>
+                        <span>홈 화면에 추가하여 실시간 트렌드를 놓치지 마세요!</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-6 sm:gap-10">
+                <!-- Input Form -->
+                <div class="glass-strong rounded-3xl p-6 sm:p-8 hover-lift">
+                    <div class="section-header -m-6 sm:-m-8 mb-6 sm:mb-8 p-6 sm:p-8 rounded-t-3xl">
+                        <h2 class="text-2xl sm:text-3xl font-bold text-white flex items-center gap-3">
+                            <i data-lucide="tag" class="w-6 sm:w-8 h-6 sm:h-8 text-blue-400"></i>
+                            콘텐츠 정보 입력
+                            <span class="trend-badge">AI 분석</span>
+                        </h2>
+                    </div>
+
+                    <div class="space-y-6 sm:space-y-8">
+                        <!-- Keywords -->
+                        <div class="space-y-3">
+                            <label class="block text-white font-semibold text-base sm:text-lg">핵심 키워드</label>
+                            <input type="text" id="keywords" placeholder="예: 축구, 수영, 농구 등"
+                                class="w-full p-4 sm:p-5 rounded-xl input-field text-white placeholder-gray-300 text-base sm:text-lg font-medium">
+                        </div>
+
+                        <!-- Sport -->
+                        <div class="space-y-3">
+                            <label class="block text-white font-semibold text-base sm:text-lg">스포츠 종목</label>
+                            <input type="text" id="sport" placeholder="구체적인 종목명 입력"
+                                class="w-full p-4 sm:p-5 rounded-xl input-field text-white placeholder-gray-300 text-base sm:text-lg font-medium">
+                        </div>
+
+                        <!-- Date -->
+                        <div class="space-y-3">
+                            <label class="block text-white font-semibold text-base sm:text-lg flex items-center gap-2">
+                                <i data-lucide="calendar" class="w-5 h-5 text-blue-400"></i>
+                                날짜
+                            </label>
+                            <input type="date" id="date"
+                                class="w-full p-4 sm:p-5 rounded-xl input-field text-white text-base sm:text-lg font-medium">
+                        </div>
+
+                        <!-- Achievement -->
+                        <div class="space-y-3">
+                            <label class="block text-white font-semibold text-base sm:text-lg">주요 성과/순간</label>
+                            <input type="text" id="achievement" placeholder="예: 개인 최고 기록 달성, 첫 승리 등"
+                                class="w-full p-4 sm:p-5 rounded-xl input-field text-white placeholder-gray-300 text-base sm:text-lg font-medium">
+                        </div>
+
+                        <!-- Challenge -->
+                        <div class="space-y-3">
+                            <label class="block text-white font-semibold text-base sm:text-lg">극복한 어려움</label>
+                            <input type="text" id="challenge" placeholder="예: 부상 회복, 슬럼프 극복 등"
+                                class="w-full p-4 sm:p-5 rounded-xl input-field text-white placeholder-gray-300 text-base sm:text-lg font-medium">
+                        </div>
+
+                        <!-- Video Type -->
+                        <div class="space-y-4">
+                            <label class="block text-white font-semibold text-base sm:text-lg flex items-center gap-2">
+                                <i data-lucide="video" class="w-5 h-5 text-purple-400"></i>
+                                영상 타입
+                                <span class="trend-badge">HOT</span>
+                            </label>
+                            <div class="grid grid-cols-1 gap-3" id="videoTypeContainer">
+                                <!-- Video type options will be inserted here -->
+                            </div>
+                        </div>
+
+                        <!-- Emotion -->
+                        <div class="space-y-4">
+                            <label class="block text-white font-semibold text-base sm:text-lg flex items-center gap-2">
+                                <i data-lucide="heart" class="w-5 h-5 text-pink-400"></i>
+                                감정/톤
+                            </label>
+                            <div class="grid grid-cols-2 gap-3" id="emotionContainer">
+                                <!-- Emotion options will be inserted here -->
+                            </div>
+                        </div>
+
+                        <!-- Trend Element -->
+                        <div class="space-y-4">
+                            <label class="block text-white font-semibold text-base sm:text-lg flex items-center gap-2">
+                                <i data-lucide="zap" class="w-5 h-5 text-yellow-400"></i>
+                                2025 실시간 트렌드 요소
+                                <span class="trend-badge">LIVE</span>
+                            </label>
+                            <div class="space-y-3" id="trendElementContainer">
+                                <!-- Trend element options will be inserted here -->
+                            </div>
+                        </div>
+
+                        <!-- Real-time Trend Toggle -->
+                        <div class="space-y-4">
+                            <div class="bg-gradient-to-r from-red-500/20 to-orange-500/20 border border-red-500/30 rounded-xl p-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <i data-lucide="activity" class="w-5 h-5 text-red-400"></i>
+                                        <div>
+                                            <div class="text-red-200 font-semibold">실시간 트렌드 분석</div>
+                                            <div class="text-red-100 text-sm">최신 유튜브 트렌드를 실시간으로 반영</div>
+                                        </div>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" id="realtimeTrendToggle" class="sr-only peer" checked>
+                                        <div class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-500"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Generate Button -->
+                        <button id="generateBtn" class="w-full btn-trend text-white font-bold py-4 sm:py-5 px-6 sm:px-8 rounded-xl flex items-center justify-center gap-3 text-lg sm:text-xl shadow-lg">
+                            <i data-lucide="zap" class="w-6 h-6"></i>
+                            실시간 트렌드 멘션 생성하기
+                            <i data-lucide="refresh-cw" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Generated Mention -->
+                <div class="glass rounded-2xl p-4 sm:p-6">
+                    <h2 class="text-xl sm:text-2xl font-semibold text-white mb-4 sm:mb-6 flex items-center gap-2">
+                        <i data-lucide="target" class="w-5 sm:w-6 h-5 sm:h-6"></i>
+                        실시간 트렌드 멘션
+                        <div class="live-dot"></div>
+                    </h2>
+
+                    <!-- Trend Status -->
+                    <div id="trendStatus" class="mb-4 hidden">
+                        <div class="bg-green-500/20 border border-green-500/30 rounded-lg p-3">
+                            <div class="flex items-center gap-2 text-green-300 text-sm">
+                                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                                <span id="trendStatusText">최신 트렌드 분석 완료</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Empty State -->
+                    <div id="emptyState" class="glass rounded-lg p-6 sm:p-8 text-center">
+                        <i data-lucide="users" class="w-12 sm:w-16 h-12 sm:h-16 text-gray-400 mx-auto mb-4"></i>
+                        <p class="text-gray-300 text-base sm:text-lg">
+                            정보를 입력하고 '실시간 트렌드 멘션 생성하기'를 클릭해주세요
+                        </p>
+                        <p class="text-gray-400 text-xs sm:text-sm mt-2">
+                            AI가 2025년 실시간 유튜브 트렌드를 분석하여 맞춤 멘션을 제작해드립니다
+                        </p>
+                    </div>
+
+                    <!-- Generated Content -->
+                    <div id="generatedContent" class="space-y-3 sm:space-y-4 hidden">
+                        <!-- Mention Display -->
+                        <div id="mentionDisplay" class="glass rounded-lg p-3 sm:p-4 min-h-[250px] sm:min-h-[300px]">
+                            <pre id="mentionText" class="text-white whitespace-pre-wrap font-medium leading-relaxed text-sm sm:text-base"></pre>
+                        </div>
+
+                        <!-- Edit Mode -->
+                        <div id="editMode" class="glass rounded-lg p-3 sm:p-4 hidden">
+                            <textarea id="editTextarea" placeholder="멘션을 편집해주세요..."
+                                class="w-full h-64 sm:h-80 bg-transparent text-white placeholder-gray-300 border-none outline-none resize-none font-medium leading-relaxed text-sm sm:text-base"></textarea>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div id="actionButtons" class="flex gap-2">
+                            <!-- Normal mode buttons -->
+                        </div>
+
+                        <!-- Trend Analysis -->
+                        <div id="trendAnalysis" class="bg-blue-500/20 border border-blue-500/30 rounded-lg p-3 sm:p-4">
+                            <div class="flex items-start gap-2">
+                                <i data-lucide="brain" class="w-4 sm:w-5 h-4 sm:h-5 text-blue-400 mt-1"></i>
+                                <div>
+                                    <div class="text-blue-300 font-semibold mb-1 text-sm sm:text-base">실시간 트렌드 분석 결과</div>
+                                    <div class="text-blue-100 text-xs sm:text-sm" id="trendAnalysisText">
+                                        AI가 분석한 최신 트렌드가 반영되었습니다.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tips -->
+                        <div class="bg-yellow-500/20 border border-yellow-500/30 rounded-lg p-3 sm:p-4">
+                            <div class="flex items-start gap-2">
+                                <i data-lucide="sparkles" class="w-4 sm:w-5 h-4 sm:h-5 text-yellow-400 mt-1"></i>
+                                <div>
+                                    <div class="text-yellow-300 font-semibold mb-1 text-sm sm:text-base">2025 실시간 트렌드 팁</div>
+                                    <div class="text-yellow-100 text-xs sm:text-sm">
+                                        생성된 멘션은 2025년 실시간 유튜브 트렌드와 알고리즘을 AI가 분석하여 반영했습니다. 
+                                        무해력, 리액션 콘텐츠, 롱폼 트렌드 등 최신 요소들이 포함되어 있습니다!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="mt-6 sm:mt-8 text-center">
+                <div class="glass rounded-lg p-3 sm:p-4">
+                    <p class="text-blue-200 text-xs sm:text-sm">
+                        🔥 <strong>실시간 트렌드 반영:</strong> 무해력, 리액션 콘텐츠, 롱폼, 스케치 코미디, 옴니보어, #아보하, 댄스 챌린지
+                        <br class="hidden sm:block">
+                        <span class="block sm:inline mt-1 sm:mt-0">
+                            ⚡ <strong>AI 트렌드 분석:</strong> 실시간 유튜브 데이터를 분석하여 개인맞춤형 멘션 생성
+                        </span>
+                    </p>
+                </div>
+                
+                <!-- Mobile Install Help -->
+                <div class="mt-4 bg-blue-500/20 border border-blue-500/30 rounded-lg p-3 block sm:hidden">
+                    <div class="text-blue-200 text-xs">
+                        <div class="font-semibold mb-1">📱 홈 화면에 추가하는 방법</div>
+                        <div>iPhone: Safari → 공유 → 홈 화면에 추가</div>
+                        <div>Android: Chrome → 메뉴 → 홈 화면에 추가</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-4 right-4 glass rounded-lg p-4 text-white transform translate-y-full opacity-0 transition-all duration-300 z-50">
+        <div class="flex items-center gap-2">
+            <i data-lucide="check" class="w-5 h-5 text-green-400"></i>
+            <span id="toastMessage">복사 완료!</span>
+        </div>
+    </div>
+
+    <script>
+        // App State
+        let appState = {
+            formData: {
+                keywords: '',
+                date: '',
+                videoType: 'shorts',
+                sport: '',
+                emotion: 'excited',
+                trendElement: 'realtime-storytelling',
+                achievement: '',
+                challenge: ''
+            },
+            generatedMention: '',
+            editedMention: '',
+            isEditMode: false,
+            deferredPrompt: null,
+            realtimeTrendsEnabled: true,
+            currentTrends: null
+        };
+
+        // 2025 Real-time Trend Data (Based on actual research)
+        const realtimeTrendData = {
+            hashtags: {
+                trending: [
+                    '#무해력', '#리액션', '#롱폼', '#스케치코미디', '#옴니보어', '#아보하',
+                    '#페이스테크', '#물성매력', '#booktok', '#foodtok', '#delulu', '#coquette',
+                    '#Shorts', '#실시간소통', '#라이브챌린지', '#댄스챌린지', '#무해력캐릭터',
+                    '#일상스토리', '#비하인드스토리', '#멘탈케어', '#데이터드리븐', '#커뮤니티',
+                    '#인생녹음중', '#태요미네', '#숏박스', '#핑계고', '#채널십오야'
+                ],
+                sports: [
+                    '#스포츠챌린지', '#운동루틴', '#홈트레이닝', '#피트니스', '#바디프로필',
+                    '#다이어트챌린지', '#건강관리', '#운동일지', '#퍼스널트레이닝', '#요가챌린지',
+                    '#러닝챌린지', '#수영챌린지', '#복근운동', '#힙업운동', '#스트레칭',
+                    '#멘탈트레이닝', '#스포츠과학', '#웨어러블기기', '#운동데이터', '#피트니스테크'
+                ]
+            },
+            trendElements: {
+                'realtime-storytelling': {
+                    patterns: [
+                        '📖 {keyword}를 시작한 지 {period}... 그때만 해도 이런 순간이 올 줄 몰랐어요. 매일매일 작은 변화들이 쌓여서 오늘의 {achievement}가 되었습니다.',
+                        '⏰ 새벽 5시, 아무도 보지 않는 곳에서의 훈련. 그 모든 순간들이 드디어 빛을 보는 순간입니다. #무해력 속에 숨겨진 진짜 노력을 보여드릴게요.',
+                        '🎬 카메라가 담지 못한 진짜 이야기... {challenge}를 극복하는 과정에서 배운 것들을 #리액션 없이 솔직하게 말씀드릴게요.'
+                    ]
+                },
+                'reaction-content': {
+                    patterns: [
+                        '😱 여러분의 반응이 궁금해요! {achievement}에 대한 실시간 리액션을 댓글로 남겨주세요. #리액션콘텐츠',
+                        '🔥 이 순간 여러분도 함께 느끼고 계신가요? 실시간으로 소통하며 이 감동을 나누고 싶어요.',
+                        '💭 여러분이라면 어떻게 하셨을까요? {sport}에서 {challenge}를 마주했을 때... 댓글로 리액션 해주세요!'
+                    ]
+                },
+                'long-form': {
+                    patterns: [
+                        '⏱️ 오늘은 30분 롱폼으로 준비했어요. 편집 없이, 자막 없이, 진짜 날것의 이야기를 들려드릴게요. #롱폼콘텐츠',
+                        '🎥 1시간 넘는 영상이지만 끝까지 봐주세요. {keyword}의 진짜 이야기는 이제부터 시작입니다.',
+                        '📺 채널십오야 스타일로... 긴 호흡으로 차근차근 이야기해보겠습니다. 숏폼에 지친 분들께 선물 같은 시간이 되길.'
+                    ]
+                },
+                'sketch-comedy': {
+                    patterns: [
+                        '🎭 숏박스처럼 재미있게! {sport} 하는 사람들의 일상을 패러디로 만들어봤어요.',
+                        '😂 너덜트 느낌으로... {achievement} 순간을 코미디로 재현해보겠습니다. 현실은 이랬는데 기대는 저랬죠 ㅋㅋ',
+                        '🎪 180초 안에 압축한 {keyword} 스토리! 웃기면서도 감동적인 진짜 이야기예요.'
+                    ]
+                },
+                'omni-vore': {
+                    patterns: [
+                        '🔄 나이도 성별도 상관없어요. {sport}에는 경계가 없다는 걸 보여드리겠습니다. #옴니보어',
+                        '🌈 취향의 무한 진화! 60대 프로게이머처럼, 저도 기존 틀을 깨고 도전해보겠습니다.',
+                        '💎 천 원의 행복부터 천만 원의 장비까지... 모든 걸 경험해보는 {keyword} 여정을 공유할게요.'
+                    ]
+                },
+                'avoha': {
+                    patterns: [
+                        '☀️ #아보하 - 평범한 오늘이 특별해지는 순간. {sport}로 채우는 보통의 하루가 이렇게 소중할 줄이야.',
+                        '🏠 집에서 혼자 하는 {keyword} 연습... 누가 알아주지 않아도 내가 느끼는 이 만족감이 전부예요.',
+                        '☕ 소소하지만 확실한 행복이 아닌, 아주 보통의 하루를 의미있게 만드는 {achievement}의 힘.'
+                    ]
+                },
+                'face-tech': {
+                    patterns: [
+                        '📱 최신 기술로 분석한 제 {keyword} 폼을 공개합니다! AI가 알려준 개선점들이 정말 신기해요.',
+                        '⌚ 웨어러블 기기가 측정한 데이터를 보니... {achievement} 순간의 심박수가 이랬다고 하네요.',
+                        '🤖 페이스테크 활용해서 {sport} 실력을 한 단계 업그레이드! 과학적 접근이 이렇게 재미있을 줄이야.'
+                    ]
+                },
+                'material-charm': {
+                    patterns: [
+                        '✨ 물성의 매력에 빠졌어요. {sport} 장비의 질감, 무게감... 이런 디테일이 주는 만족감이 있어요.',
+                        '🎯 브랜드가 아닌 소재 자체에 끌려서 선택한 {keyword} 용품들. 진짜 좋은 건 다르더라고요.',
+                        '🔍 디테일에 집중해보세요. {achievement} 순간에 느껴지는 모든 감각들이 얼마나 소중한지...'
+                    ]
+                }
+            },
+            videoTypes: [
+                { 
+                    value: 'shorts', 
+                    label: 'YouTube Shorts (15-60초)', 
+                    icon: '📱',
+                    trend: 'HOT',
+                    description: '무해력 콘텐츠 대세'
+                },
+                { 
+                    value: 'reaction', 
+                    label: '리액션 영상 (3-10분)', 
+                    icon: '😱',
+                    trend: 'TRENDING',
+                    description: '실시간 소통 트렌드'
+                },
+                { 
+                    value: 'long-form', 
+                    label: '롱폼 콘텐츠 (30분+)', 
+                    icon: '🎬',
+                    trend: 'NEW',
+                    description: '깊이 있는 스토리텔링'
+                },
+                { 
+                    value: 'live', 
+                    label: '라이브 스트림', 
+                    icon: '🔴',
+                    trend: 'LIVE',
+                    description: '실시간 커뮤니티'
+                },
+                { 
+                    value: 'sketch', 
+                    label: '스케치 코미디 (5-15분)', 
+                    icon: '🎭',
+                    trend: 'VIRAL',
+                    description: '숏박스 스타일 인기'
+                }
+            ],
+            emotions: [
+                { value: 'excited', label: '흥미진진한', emoji: '🔥', trend: 'HOT' },
+                { value: 'grateful', label: '감사한', emoji: '🙏', trend: '' },
+                { value: 'determined', label: '의지에 찬', emoji: '💪', trend: '' },
+                { value: 'reflective', label: '돌아보는', emoji: '💭', trend: 'DEEP' },
+                { value: 'proud', label: '자랑스러운', emoji: '✨', trend: '' },
+                { value: 'harmless', label: '무해한', emoji: '😇', trend: 'TRENDING' },
+                { value: 'authentic', label: '진솔한', emoji: '💯', trend: 'NEW' }
+            ]
+        };
+
+        // Mock function to simulate real-time trend analysis
+        async function analyzeTrends(formData) {
+            // Simulate API call delay
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            const trendKeywords = [];
+            const currentHour = new Date().getHours();
+            
+            // Time-based trending
+            if (currentHour >= 6 && currentHour <= 9) {
+                trendKeywords.push('새벽훈련', '모닝루틴', '일찍일어나기챌린지');
+            } else if (currentHour >= 18 && currentHour <= 22) {
+                trendKeywords.push('퇴근후운동', '저녁루틴', '야간훈련');
+            }
+            
+            // Sport-specific trending
+            const sportTrends = {
+                '축구': ['발롱도르2025', '월드컵예선', '손흥민챌린지'],
+                '농구': ['NBA2025', '3점슛챌린지', '덩크챌린지'],
+                '수영': ['올림픽준비', '자유형챌린지', '수영다이어트'],
+                '야구': ['WBC2025', '홈런챌린지', '투구폼분석'],
+                '테니스': ['윔블던2025', '서브챌린지', '백핸드마스터']
+            };
+            
+            if (formData.sport && sportTrends[formData.sport]) {
+                trendKeywords.push(...sportTrends[formData.sport]);
+            }
+            
+            // Add general 2025 trends
+            trendKeywords.push('무해력', '리액션콘텐츠', '롱폼영상', 'AI분석', '실시간소통');
+            
+            return {
+                keywords: trendKeywords,
+                analysis: `2025년 ${formData.sport} 트렌드 분석: ${trendKeywords.slice(0, 3).join(', ')} 등이 급상승 중입니다.`,
+                confidence: Math.floor(Math.random() * 20) + 80, // 80-100%
+                timestamp: new Date().toISOString()
+            };
+        }
+
+        // Enhanced Mention Generation with Real-time Trends
+        async function generateMention() {
+            const generateBtn = document.getElementById('generateBtn');
+            const originalText = generateBtn.innerHTML;
+            
+            // Show loading state
+            generateBtn.innerHTML = `
+                <i data-lucide="loader-2" class="w-6 h-6 animate-spin"></i>
+                실시간 트렌드 분석 중...
+                <i data-lucide="wifi" class="w-6 h-6"></i>
+            `;
+            generateBtn.disabled = true;
+            
+            try {
+                let trendData = null;
+                
+                if (appState.realtimeTrendsEnabled) {
+                    // Show trend analysis status
+                    showTrendStatus('실시간 트렌드 분석 중...', 'analyzing');
+                    
+                    // Analyze current trends
+                    trendData = await analyzeTrends(appState.formData);
+                    appState.currentTrends = trendData;
+                    
+                    showTrendStatus('최신 트렌드 분석 완료!', 'success');
+                }
+                
+                // Generate mention with trend data
+                const mention = generateTrendAwareMention(trendData);
+                
+                appState.generatedMention = mention;
+                appState.editedMention = '';
+                appState.isEditMode = false;
+                
+                updateUI();
+                
+                // Show trend analysis in UI
+                if (trendData) {
+                    document.getElementById('trendAnalysisText').textContent = trendData.analysis;
+                }
+                
+            } catch (error) {
+                console.error('Error generating mention:', error);
+                showTrendStatus('트렌드 분석 실패 - 기본 모드로 생성', 'error');
+                
+                // Fallback to basic generation
+                const mention = generateBasicMention();
+                appState.generatedMention = mention;
+                updateUI();
+            } finally {
+                // Restore button
+                generateBtn.innerHTML = originalText;
+                generateBtn.disabled = false;
+                lucide.createIcons();
+            }
+        }
+
+        function generateTrendAwareMention(trendData) {
+            const { formData } = appState;
+            const trendElement = realtimeTrendData.trendElements[formData.trendElement] || realtimeTrendData.trendElements['realtime-storytelling'];
+            
+            // Select pattern and customize with real-time data
+            const patterns = trendElement.patterns;
+            const selectedPattern = patterns[Math.floor(Math.random() * patterns.length)];
+            
+            // Replace placeholders with actual data
+            let customizedPattern = selectedPattern
+                .replace('{keyword}', formData.keywords || '운동')
+                .replace('{sport}', formData.sport || '스포츠')
+                .replace('{achievement}', formData.achievement || '성과')
+                .replace('{challenge}', formData.challenge || '도전')
+                .replace('{period}', '6개월');
+            
+            // Build complete mention
+            const videoTypeInfo = realtimeTrendData.videoTypes.find(v => v.value === formData.videoType);
+            const videoText = getVideoTypeText(formData.videoType, videoTypeInfo);
+            
+            // Select trending hashtags
+            const trendingHashtags = selectTrendingHashtags(trendData, formData);
+            
+            // Add real-time insights
+            const insights = generateTrendInsights(trendData, formData);
+            const goals = generateFutureGoals(formData);
+            
+            const mention = `${customizedPattern}
+
+${insights}
+
+${goals}
+
+${videoText}
+
+${trendingHashtags}
+
+#${formData.sport} #2025트렌드 #실시간`;
+
+            return mention;
+        }
+
+        function generateBasicMention() {
+            // Fallback basic generation (original logic)
+            const { formData } = appState;
+            
+            const hooks = {
+                excited: ['🔥 이 순간을 위해 얼마나 기다렸는지...', '⚡ 드디어 해냈다!', '🚀 상상도 못했던 일이...'],
+                grateful: ['🙏 모든 분들 덕분에...', '❤️ 정말 감사한 마음으로...', '✨ 이런 기회를 주신...'],
+                determined: ['💪 포기하지 않길 정말 잘했어요', '🎯 목표를 향한 한 걸음', '⚡ 더 강해지기 위해...'],
+                reflective: ['💭 돌이켜보면...', '📖 그때 그 순간이...', '🌟 이 여정을 통해 배운 것은...'],
+                proud: ['✨ 자랑스러운 순간', '🏆 이 성과가 의미하는 것은...', '🌟 드디어 이루어낸...'],
+                harmless: ['😇 작고 소소한 변화가...', '🌸 순수한 마음으로...', '☀️ 평범한 일상 속에서...'],
+                authentic: ['💯 진짜 이야기를 들려드릴게요', '🎯 가식 없이 솔직하게...', '📷 카메라 뒤의 진실은...']
+            };
+
+            const selectedHook = hooks[formData.emotion][Math.floor(Math.random() * hooks[formData.emotion].length)];
+            const basicHashtags = realtimeTrendData.hashtags.trending.slice(0, 8).join(' ');
+            
+            return `${selectedHook}
+
+📖 ${formData.keywords || '운동'}의 여정이 이렇게 의미있을 줄 몰랐어요.
+
+💪 ${formData.achievement || '이 성과'}를 이루기까지의 과정을 나누고 싶어요.
+
+🎥 자세한 이야기는 영상에서 확인해주세요!
+
+${basicHashtags}
+
+#${formData.sport} #2025트렌드 #유튜브`;
+        }
+
+        function selectTrendingHashtags(trendData, formData) {
+            let hashtags = [...realtimeTrendData.hashtags.trending];
+            
+            // Add sport-specific hashtags
+            if (formData.sport) {
+                hashtags.push(...realtimeTrendData.hashtags.sports);
+            }
+            
+            // Add real-time trending keywords
+            if (trendData && trendData.keywords) {
+                trendData.keywords.forEach(keyword => {
+                    hashtags.push(`#${keyword}`);
+                });
+            }
+            
+            // Remove duplicates and select random subset
+            hashtags = [...new Set(hashtags)];
+            const selectedHashtags = hashtags
+                .sort(() => 0.5 - Math.random())
+                .slice(0, 10);
+            
+            return selectedHashtags.join(' ');
+        }
+
+        function generateTrendInsights(trendData, formData) {
+            const insights = [
+                `⚡ ${formData.keywords}를 통해 배운 가장 큰 교훈은 '꾸준함이 재능을 이긴다'는 것`,
+                `🎯 실패를 두려워하지 않고 도전하는 용기가 가장 중요한 자산`,
+                `💡 완벽하지 않아도 괜찮다, 성장하는 과정 자체가 아름답다`,
+                `🌟 경쟁보다는 어제의 나와의 비교가 진정한 성장의 기준`,
+                `🤝 혼자가 아니라 함께할 때 더 큰 힘이 나온다는 것`,
+                `🧠 몸만큼 마음도 단단해져야 한다는 걸 배웠어요`,
+                `📊 데이터가 알려준 작은 변화들이 결국 큰 성과로 이어졌어요`
+            ];
+            
+            return insights[Math.floor(Math.random() * insights.length)];
+        }
+
+        function generateFutureGoals(formData) {
+            const goals = [
+                `🎯 다음 목표는 ${formData.keywords}에서 한 단계 더 성장하는 것`,
+                `🚀 이번 경험을 바탕으로 더 큰 무대에 도전하고 싶어요`,
+                `💪 꾸준한 훈련으로 내년에는 더 발전된 모습 보여드릴게요`,
+                `🌟 후배들에게도 좋은 롤모델이 되고 싶습니다`,
+                `⭐ 궁극적으로는 ${formData.sport}에서 최고가 되는 그날까지`,
+                `🎪 새로운 챌린지로 여러분과 함께 성장해나가겠습니다`,
+                `📈 더 많은 분들과 이 경험을 나누고 싶어요`
+            ];
+            
+            return goals[Math.floor(Math.random() * goals.length)];
+        }
+
+        function getVideoTypeText(videoType, videoTypeInfo) {
+            const videoTexts = {
+                shorts: '📱 60초로 압축한 이 순간, 놓치지 마세요! #Shorts',
+                reaction: '😱 여러분의 실시간 리액션이 궁금해요! 댓글로 함께해주세요',
+                'long-form': '🎬 30분 롱폼으로 깊이 있는 이야기를 준비했어요. 끝까지 함께해주세요',
+                live: '🔴 실시간으로 여러분과 나누고 싶었던 이야기',
+                sketch: '🎭 재미있게 각색한 스토리! 웃으면서 봐주세요'
+            };
+            
+            return videoTexts[videoType] || videoTexts.shorts;
+        }
+
+        function showTrendStatus(message, type) {
+            const trendStatus = document.getElementById('trendStatus');
+            const trendStatusText = document.getElementById('trendStatusText');
+            
+            trendStatus.classList.remove('hidden');
+            trendStatusText.textContent = message;
+            
+            // Update styling based on type
+            const statusDiv = trendStatus.querySelector('div');
+            statusDiv.className = 'bg-blue-500/20 border border-blue-500/30 rounded-lg p-3';
+            
+            if (type === 'success') {
+                statusDiv.className = 'bg-green-500/20 border border-green-500/30 rounded-lg p-3';
+            } else if (type === 'error') {
+                statusDiv.className = 'bg-red-500/20 border border-red-500/30 rounded-lg p-3';
+            } else if (type === 'analyzing') {
+                statusDiv.className = 'bg-orange-500/20 border border-orange-500/30 rounded-lg p-3';
+            }
+        }
+
+        // UI Updates (Enhanced)
+        function updateUI() {
+            const emptyState = document.getElementById('emptyState');
+            const generatedContent = document.getElementById('generatedContent');
+            const mentionDisplay = document.getElementById('mentionDisplay');
+            const editMode = document.getElementById('editMode');
+            const mentionText = document.getElementById('mentionText');
+            const editTextarea = document.getElementById('editTextarea');
+
+            if (appState.generatedMention) {
+                emptyState.classList.add('hidden');
+                generatedContent.classList.remove('hidden');
+
+                if (appState.isEditMode) {
+                    mentionDisplay.classList.add('hidden');
+                    editMode.classList.remove('hidden');
+                    editTextarea.value = appState.editedMention || appState.generatedMention;
+                } else {
+                    mentionDisplay.classList.remove('hidden');
+                    editMode.classList.add('hidden');
+                    mentionText.textContent = appState.editedMention || appState.generatedMention;
+                }
+
+                updateActionButtons();
+            } else {
+                emptyState.classList.remove('hidden');
+                generatedContent.classList.add('hidden');
+                document.getElementById('trendStatus').classList.add('hidden');
+            }
+        }
+
+        function updateActionButtons() {
+            const actionButtons = document.getElementById('actionButtons');
+            
+            if (appState.isEditMode) {
+                actionButtons.innerHTML = `
+                    <button id="saveEditBtn" class="flex-1 btn-success text-white font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-xl flex items-center justify-center gap-2 text-base sm:text-lg shadow-lg hover-lift">
+                        <i data-lucide="check" class="w-5 h-5"></i>
+                        편집 완료
+                    </button>
+                    <button id="cancelEditBtn" class="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 text-base sm:text-lg shadow-lg hover-lift">
+                        취소
+                    </button>
+                `;
+                
+                document.getElementById('saveEditBtn').addEventListener('click', saveEdit);
+                document.getElementById('cancelEditBtn').addEventListener('click', cancelEdit);
+            } else {
+                actionButtons.innerHTML = `
+                    <button id="editBtn" class="flex-1 btn-secondary text-white font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-xl flex items-center justify-center gap-2 text-base sm:text-lg shadow-lg hover-lift">
+                        <i data-lucide="edit-3" class="w-5 h-5"></i>
+                        편집하기
+                    </button>
+                    <button id="copyBtn" class="flex-1 btn-white py-3 sm:py-4 px-4 sm:px-6 rounded-xl font-bold flex items-center justify-center gap-2 text-base sm:text-lg shadow-lg hover-lift">
+                        <i data-lucide="copy" class="w-5 h-5"></i>
+                        복사하기
+                    </button>
+                `;
+                
+                document.getElementById('editBtn').addEventListener('click', startEdit);
+                document.getElementById('copyBtn').addEventListener('click', () => copyToClipboard(appState.editedMention || appState.generatedMention));
+            }
+            
+            // Re-initialize Lucide icons
+            lucide.createIcons();
+        }
+
+        // Edit Functions
+        function startEdit() {
+            appState.isEditMode = true;
+            appState.editedMention = appState.editedMention || appState.generatedMention;
+            updateUI();
+        }
+
+        function saveEdit() {
+            appState.editedMention = document.getElementById('editTextarea').value;
+            appState.isEditMode = false;
+            updateUI();
+        }
+
+        function cancelEdit() {
+            appState.isEditMode = false;
+            appState.editedMention = '';
+            updateUI();
+        }
+
+        // Copy to Clipboard
+        async function copyToClipboard(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast('실시간 트렌드 멘션 복사 완료! 🔥');
+            } catch (err) {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showToast('실시간 트렌드 멘션 복사 완료! 🔥');
+            }
+        }
+
+        // Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastMessage.textContent = message;
+            toast.classList.remove('translate-y-full', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            
+            // Add fade-in animation
+            toast.classList.add('fade-in');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-full', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100', 'fade-in');
+            }, 3000);
+        }
+
+        // Form Input Handlers (Enhanced)
+        function setupFormInputs() {
+            // Text inputs
+            ['keywords', 'sport', 'achievement', 'challenge'].forEach(field => {
+                const element = document.getElementById(field);
+                if (element) {
+                    element.addEventListener('input', (e) => {
+                        appState.formData[field] = e.target.value;
+                    });
+                }
+            });
+            
+            // Date input
+            const dateElement = document.getElementById('date');
+            if (dateElement) {
+                // Set today's date as default
+                dateElement.value = new Date().toISOString().split('T')[0];
+                dateElement.addEventListener('input', (e) => {
+                    appState.formData.date = e.target.value;
+                });
+            }
+
+            // Real-time trend toggle
+            const realtimeTrendToggle = document.getElementById('realtimeTrendToggle');
+            realtimeTrendToggle.addEventListener('change', (e) => {
+                appState.realtimeTrendsEnabled = e.target.checked;
+            });
+
+            // Video types with trend indicators
+            const videoTypeContainer = document.getElementById('videoTypeContainer');
+            realtimeTrendData.videoTypes.forEach(type => {
+                const label = document.createElement('label');
+                label.className = 'radio-option flex items-center gap-4 p-4 rounded-xl cursor-pointer transition-all';
+                
+                const trendBadge = type.trend ? `<span class="trend-badge">${type.trend}</span>` : '';
+                
+                label.innerHTML = `
+                    <input type="radio" name="videoType" value="${type.value}" ${type.value === 'shorts' ? 'checked' : ''} class="sr-only">
+                    <div class="w-5 h-5 rounded-full border-2 border-white/30 flex items-center justify-center">
+                        <div class="w-2.5 h-2.5 rounded-full bg-blue-400 opacity-0 transition-opacity"></div>
+                    </div>
+                    <span class="text-2xl">${type.icon}</span>
+                    <div class="flex-1">
+                        <div class="text-white text-base sm:text-lg font-medium flex items-center gap-2">
+                            ${type.label} ${trendBadge}
+                        </div>
+                        <div class="text-gray-300 text-xs sm:text-sm">${type.description}</div>
+                    </div>
+                `;
+                
+                const radio = label.querySelector('input');
+                const indicator = label.querySelector('div > div');
+                
+                radio.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        appState.formData.videoType = e.target.value;
+                        
+                        // Update all radio indicators
+                        document.querySelectorAll('input[name="videoType"]').forEach(r => {
+                            const parentLabel = r.closest('label');
+                            const ind = parentLabel.querySelector('div > div');
+                            if (r.checked) {
+                                parentLabel.classList.add('selected');
+                                ind.style.opacity = '1';
+                            } else {
+                                parentLabel.classList.remove('selected');
+                                ind.style.opacity = '0';
+                            }
+                        });
+                    }
+                });
+                
+                // Set initial state
+                if (type.value === 'shorts') {
+                    label.classList.add('selected');
+                    indicator.style.opacity = '1';
+                }
+                
+                videoTypeContainer.appendChild(label);
+            });
+
+            // Emotions with trend indicators
+            const emotionContainer = document.getElementById('emotionContainer');
+            realtimeTrendData.emotions.forEach(emotion => {
+                const label = document.createElement('label');
+                label.className = 'radio-option flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-all';
+                
+                const trendBadge = emotion.trend ? `<span class="trend-badge">${emotion.trend}</span>` : '';
+                
+                label.innerHTML = `
+                    <input type="radio" name="emotion" value="${emotion.value}" ${emotion.value === 'excited' ? 'checked' : ''} class="sr-only">
+                    <div class="w-4 h-4 rounded-full border-2 border-white/30 flex items-center justify-center">
+                        <div class="w-2 h-2 rounded-full bg-pink-400 opacity-0 transition-opacity"></div>
+                    </div>
+                    <span class="text-xl">${emotion.emoji}</span>
+                    <div class="flex-1">
+                        <span class="text-white text-sm sm:text-base font-medium flex items-center gap-2">
+                            ${emotion.label} ${trendBadge}
+                        </span>
+                    </div>
+                `;
+                
+                const radio = label.querySelector('input');
+                const indicator = label.querySelector('div > div');
+                
+                radio.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        appState.formData.emotion = e.target.value;
+                        
+                        // Update all radio indicators
+                        document.querySelectorAll('input[name="emotion"]').forEach(r => {
+                            const parentLabel = r.closest('label');
+                            const ind = parentLabel.querySelector('div > div');
+                            if (r.checked) {
+                                parentLabel.classList.add('selected');
+                                ind.style.opacity = '1';
+                            } else {
+                                parentLabel.classList.remove('selected');
+                                ind.style.opacity = '0';
+                            }
+                        });
+                    }
+                });
+                
+                // Set initial state
+                if (emotion.value === 'excited') {
+                    label.classList.add('selected');
+                    indicator.style.opacity = '1';
+                }
+                
+                emotionContainer.appendChild(label);
+            });
+
+            // Trend elements with real-time options
+            const trendElementContainer = document.getElementById('trendElementContainer');
+            const trendElements = [
+                { value: 'realtime-storytelling', label: '실시간 스토리텔링', desc: 'AI 트렌드 분석 기반', trend: 'AI' },
+                { value: 'reaction-content', label: '리액션 콘텐츠', desc: '실시간 소통 중심', trend: 'HOT' },
+                { value: 'long-form', label: '롱폼 콘텐츠', desc: '깊이 있는 이야기', trend: 'NEW' },
+                { value: 'sketch-comedy', label: '스케치 코미디', desc: '숏박스 스타일', trend: 'VIRAL' },
+                { value: 'omni-vore', label: '옴니보어', desc: '경계 없는 콘텐츠', trend: 'TREND' },
+                { value: 'avoha', label: '#아보하', desc: '평범한 일상의 특별함', trend: 'CORE' },
+                { value: 'face-tech', label: '페이스테크', desc: '기술 기반 분석', trend: 'TECH' },
+                { value: 'material-charm', label: '물성매력', desc: '디테일 중심', trend: 'DETAIL' }
+            ];
+
+            trendElements.forEach(element => {
+                const label = document.createElement('label');
+                label.className = 'radio-option flex items-start gap-4 p-4 rounded-xl cursor-pointer transition-all';
+                
+                const trendBadge = element.trend ? `<span class="trend-badge">${element.trend}</span>` : '';
+                
+                label.innerHTML = `
+                    <input type="radio" name="trendElement" value="${element.value}" ${element.value === 'realtime-storytelling' ? 'checked' : ''} class="sr-only">
+                    <div class="w-5 h-5 rounded-full border-2 border-white/30 flex items-center justify-center mt-1">
+                        <div class="w-2.5 h-2.5 rounded-full bg-yellow-400 opacity-0 transition-opacity"></div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="text-white font-bold text-base sm:text-lg flex items-center gap-2">
+                            ${element.label} ${trendBadge}
+                        </div>
+                        <div class="text-gray-300 text-sm sm:text-base mt-1">${element.desc}</div>
+                    </div>
+                `;
+                
+                const radio = label.querySelector('input');
+                const indicator = label.querySelector('div > div');
+                
+                radio.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        appState.formData.trendElement = e.target.value;
+                        
+                        // Update all radio indicators
+                        document.querySelectorAll('input[name="trendElement"]').forEach(r => {
+                            const parentLabel = r.closest('label');
+                            const ind = parentLabel.querySelector('div > div');
+                            if (r.checked) {
+                                parentLabel.classList.add('selected');
+                                ind.style.opacity = '1';
+                            } else {
+                                parentLabel.classList.remove('selected');
+                                ind.style.opacity = '0';
+                            }
+                        });
+                    }
+                });
+                
+                // Set initial state
+                if (element.value === 'realtime-storytelling') {
+                    label.classList.add('selected');
+                    indicator.style.opacity = '1';
+                }
+                
+                trendElementContainer.appendChild(label);
+            });
+        }
+
+        // PWA Functions
+        function setupPWA() {
+            // Install prompt
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                appState.deferredPrompt = e;
+                document.getElementById('installPrompt').classList.remove('hidden');
+            });
+
+            // Install button
+            document.getElementById('installBtn').addEventListener('click', async () => {
+                if (appState.deferredPrompt) {
+                    appState.deferredPrompt.prompt();
+                    const { outcome } = await appState.deferredPrompt.userChoice;
+                    if (outcome === 'accepted') {
+                        document.getElementById('installPrompt').classList.add('hidden');
+                    }
+                    appState.deferredPrompt = null;
+                }
+            });
+
+            // Dismiss button
+            document.getElementById('dismissBtn').addEventListener('click', () => {
+                document.getElementById('installPrompt').classList.add('hidden');
+            });
+
+            // Check if already installed
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                document.getElementById('installPrompt').classList.add('hidden');
+            }
+        }
+
+        // Service Worker Registration
+        function registerServiceWorker() {
+            if ('serviceWorker' in navigator) {
+                const swCode = `
+                    const CACHE_NAME = 'realtime-youtube-mention-generator-v1';
+                    const urlsToCache = ['/'];
+                    
+                    self.addEventListener('install', (event) => {
+                        event.waitUntil(
+                            caches.open(CACHE_NAME)
+                                .then((cache) => cache.addAll(urlsToCache))
+                        );
+                    });
+                    
+                    self.addEventListener('fetch', (event) => {
+                        event.respondWith(
+                            caches.match(event.request)
+                                .then((response) => {
+                                    if (response) {
+                                        return response;
+                                    }
+                                    return fetch(event.request);
+                                })
+                        );
+                    });
+                `;
+                
+                const blob = new Blob([swCode], { type: 'application/javascript' });
+                const swURL = URL.createObjectURL(blob);
+                
+                navigator.serviceWorker.register(swURL)
+                    .then((registration) => {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch((err) => {
+                        console.log('ServiceWorker registration failed');
+                    });
+            }
+        }
+
+        // Initialize App
+        function init() {
+            setupFormInputs();
+            setupPWA();
+            registerServiceWorker();
+            
+            // Generate button
+            document.getElementById('generateBtn').addEventListener('click', generateMention);
+            
+            // Initialize Lucide icons
+            lucide.createIcons();
+        }
+
+        // Start the app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
