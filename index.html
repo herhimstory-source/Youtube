@@ -1,0 +1,686 @@
+import React, { useState, useEffect } from 'react';
+import { Copy, Sparkles, TrendingUp, Video, Calendar, Tag, Heart, Zap, Users, Target, RefreshCw, Clock, Globe, BarChart3, PlayCircle, MessageSquare, ThumbsUp } from 'lucide-react';
+
+const YoutubeTrendingMentionGenerator = () => {
+  const [formData, setFormData] = useState({
+    keywords: '',
+    date: '',
+    videoType: 'shorts',
+    sport: '',
+    emotion: 'excited',
+    trendElement: 'storytelling',
+    achievement: '',
+    challenge: ''
+  });
+
+  const [generatedMention, setGeneratedMention] = useState('');
+  const [copied, setCopied] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [trendData, setTrendData] = useState({
+    hashtags: [],
+    trendingTopics: [],
+    popularFormats: [],
+    lastUpdated: null
+  });
+
+  // 실시간 트렌드 데이터 (모의 데이터 - 실제로는 API에서 가져옴)
+  const [currentTrends, setCurrentTrends] = useState({
+    globalHashtags: [
+      '#Shorts', '#trending', '#viral', '#fyp', '#2025goals', '#motivation',
+      '#스포츠', '#청춘', '#도전', '#성장', '#꿈', '#열정', '#극복', '#감동',
+      '#라이브', '#소통', '#팬', '#응원', '#희망', '#미래'
+    ],
+    trendingFormats: [
+      '60초 챌린지', '비하인드 스토리', '데이터 시각화', '라이브 Q&A',
+      '성장 일기', '실패담 공유', '멘탈 관리', '팬과의 소통',
+      '기록 경신', '팀워크 스토리'
+    ],
+    popularEmotions: [
+      { type: 'grateful', weight: 0.9 },
+      { type: 'determined', weight: 0.8 },
+      { type: 'excited', weight: 0.85 },
+      { type: 'proud', weight: 0.7 },
+      { type: 'reflective', weight: 0.6 }
+    ]
+  });
+
+  const videoTypes = [
+    { value: 'shorts', label: 'YouTube Shorts (15-60초)', icon: '📱', trending: 95 },
+    { value: 'regular', label: '일반 영상 (3-8분)', icon: '🎥', trending: 70 },
+    { value: 'live', label: '라이브 스트림', icon: '🔴', trending: 85 },
+    { value: 'series', label: '시리즈 영상', icon: '📺', trending: 60 }
+  ];
+
+  const emotions = [
+    { value: 'excited', label: '흥미진진한', emoji: '🔥', trending: 90 },
+    { value: 'grateful', label: '감사한', emoji: '🙏', trending: 95 },
+    { value: 'determined', label: '의지에 찬', emoji: '💪', trending: 85 },
+    { value: 'reflective', label: '돌아보는', emoji: '💭', trending: 70 },
+    { value: 'proud', label: '자랑스러운', emoji: '✨', trending: 80 }
+  ];
+
+  const trendElements = [
+    { value: 'storytelling', label: '스토리텔링', desc: '개인적 여정 공유', trending: 95, popularity: 'hot' },
+    { value: 'behind-scenes', label: '비하인드 신', desc: '훈련 과정 공개', trending: 90, popularity: 'hot' },
+    { value: 'mental-health', label: '멘탈 케어', desc: '정신 건강 중시', trending: 88, popularity: 'rising' },
+    { value: 'community', label: '커뮤니티', desc: '팬과의 소통', trending: 92, popularity: 'hot' },
+    { value: 'tech-data', label: '데이터 활용', desc: '기술적 분석', trending: 75, popularity: 'stable' },
+    { value: 'challenge', label: '챌린지', desc: '바이럴 참여', trending: 85, popularity: 'rising' },
+    { value: 'live-interaction', label: '라이브 소통', desc: '실시간 팬 인터랙션', trending: 93, popularity: 'hot' },
+    { value: 'micro-content', label: '마이크로 콘텐츠', desc: '짧고 강렬한 메시지', trending: 87, popularity: 'rising' }
+  ];
+
+  // 실시간 트렌드 해시태그 업데이트
+  const updateTrendingHashtags = () => {
+    const currentTime = new Date();
+    const timeBasedHashtags = [];
+    
+    // 시간대별 트렌드 해시태그
+    const hour = currentTime.getHours();
+    if (hour >= 6 && hour < 12) {
+      timeBasedHashtags.push('#모닝루틴', '#새벽훈련', '#아침동기부여');
+    } else if (hour >= 12 && hour < 18) {
+      timeBasedHashtags.push('#오후훈련', '#점심시간', '#에너지충전');
+    } else {
+      timeBasedHashtags.push('#저녁운동', '#하루마무리', '#내일준비');
+    }
+
+    // 요일별 트렌드
+    const dayOfWeek = currentTime.getDay();
+    const weekdayHashtags = ['#월요병극복', '#화요일도전', '#수요일반환점', '#목요일힘내기', '#금요일마무리', '#주말준비', '#일요일충전'];
+    timeBasedHashtags.push(weekdayHashtags[dayOfWeek]);
+
+    return [...currentTrends.globalHashtags, ...timeBasedHashtags];
+  };
+
+  // AI 기반 트렌드 분석 (모의)
+  const analyzeTrendingContent = (keywords, sport) => {
+    const trendScore = {
+      storytelling: Math.random() * 30 + 70, // 70-100%
+      community: Math.random() * 25 + 75,    // 75-100%
+      'behind-scenes': Math.random() * 20 + 80, // 80-100%
+      'mental-health': Math.random() * 15 + 85,  // 85-100%
+    };
+
+    return Object.entries(trendScore)
+      .sort(([,a], [,b]) => b - a)
+      .slice(0, 3);
+  };
+
+  // 실시간 멘션 생성 (AI 최적화)
+  const generateAIMention = () => {
+    setIsLoading(true);
+    
+    // 실시간 트렌드 분석
+    const trendAnalysis = analyzeTrendingContent(formData.keywords, formData.sport);
+    const trendingHashtags = updateTrendingHashtags();
+    
+    const hooks = {
+      excited: [
+        '🔥 이 순간을 위해 얼마나 기다렸는지...',
+        '⚡ 드디어 해냈다! 믿기지 않는 순간',
+        '🚀 상상도 못했던 일이 현실이 되었어요',
+        '💥 심장이 터질 것 같은 이 기분!'
+      ],
+      grateful: [
+        '🙏 모든 분들 덕분에 가능했던 순간',
+        '❤️ 정말 감사한 마음으로 이 글을 씁니다',
+        '✨ 이런 기회를 주신 모든 분들께',
+        '🤗 혼자서는 절대 불가능했을 일'
+      ],
+      determined: [
+        '💪 포기하지 않길 정말 잘했어요',
+        '🎯 목표를 향한 확실한 한 걸음',
+        '⚡ 더 강해지기 위한 여정은 계속됩니다',
+        '🔥 이제 시작일 뿐, 더 높이 올라갈게요'
+      ],
+      reflective: [
+        '💭 돌이켜보면 모든 순간이 의미있었네요',
+        '📖 그때 그 힘들었던 순간들이 오늘을 만들었어요',
+        '🌟 이 여정을 통해 배운 가장 소중한 것들',
+        '⏰ 시간이 흘러 깨달은 진짜 중요한 것들'
+      ],
+      proud: [
+        '✨ 정말 자랑스러운 이 순간',
+        '🏆 이 성과가 의미하는 것은 단순한 결과가 아니라',
+        '🌟 드디어 이루어낸 꿈의 첫 걸음',
+        '👑 자신에게 당당히 말할 수 있어요: 잘했다!'
+      ]
+    };
+
+    const storyElements = {
+      storytelling: [
+        `📖 ${formData.keywords}를 처음 시작했을 때만 해도 이런 날이 올 줄 몰랐어요. 매일 ${formData.challenge || '훈련'}하며 느꼈던 그 순간들이 오늘 ${formData.achievement || '이 성과'}로 이어졌습니다. 포기하고 싶었던 순간들, 한계를 느꼈던 그 시간들이 모두 의미가 있었네요.`,
+        `📚 예전의 저에게 말해주고 싶어요. "${formData.keywords}에서 포기하지 마, 네가 꿈꾸던 그 순간이 정말 올 거야"라고요. 그 어떤 어려움도 결국 성장의 밑거름이 된다는 것을 이제야 깨달았습니다.`
+      ],
+      'behind-scenes': [
+        `🏃‍♀️ 카메라에 담기지 않은 새벽 훈련, 쓰라린 실패들, 눈물로 젖은 수건들... 그 모든 과정이 오늘의 ${formData.achievement || '성과'}를 만들었어요. 화려한 무대 뒤에는 항상 보이지 않는 노력들이 있다는 걸 여러분께 보여드리고 싶었어요.`,
+        `⏰ 새벽 5시 훈련장, 아무도 보지 않는 곳에서의 묵묵한 노력들이 드디어 빛을 보는 순간입니다. 포기하고 싶었던 그 모든 순간들이 지금 이 기쁨으로 돌아왔어요.`
+      ],
+      'mental-health': [
+        `🧠 몸만큼 마음도 단단해져야 한다는 걸 배웠어요. 압박감과 스트레스를 이겨내는 것도 실력의 일부라는 것을... 정신적 회복력이 얼마나 중요한지 절실히 느꼈습니다.`,
+        `💚 선수로서의 성장뿐만 아니라 한 사람으로서의 성장도 중요하다는 걸 깨달았습니다. 건강한 마음가짐이 최고의 퍼포먼스를 만든다는 걸 경험했어요.`
+      ],
+      community: [
+        `👥 혼자서는 절대 할 수 없었을 일이에요. 응원해주신 모든 분들과 함께 이뤄낸 성과입니다! 댓글 하나하나, 응원 메시지 하나하나가 모두 제게는 큰 힘이 되었어요.`,
+        `🤝 댓글로 격려해주시고, 라이브에서 함께해주신 모든 분들 덕분에 여기까지 올 수 있었어요. 이 기쁨을 여러분과 나누고 싶어서 이렇게 글을 올립니다.`
+      ],
+      'tech-data': [
+        `📊 데이터가 보여준 작은 변화들이 결국 큰 성과로 이어졌어요. 수치로 확인하니 더욱 뿌듯합니다! 객관적인 지표들이 주관적인 느낌을 뒷받침해주니 더욱 확신이 서네요.`,
+        `⌚ 웨어러블 기기가 알려준 제 한계를 하나씩 뛰어넘는 재미가 있어요. 기술의 도움으로 더 정확하고 효율적인 훈련이 가능했습니다.`
+      ],
+      challenge: [
+        `🎯 ${formData.keywords} 챌린지에 참여하면서 새로운 가능성을 발견했어요! 트렌드를 따라가는 것도 때로는 새로운 영감을 주는 것 같아요.`,
+        `🌟 트렌드에 맞춰 도전해보니 예상치 못한 재미와 성장이 있었습니다. 변화를 두려워하지 않고 도전하는 용기가 중요하다는 걸 느꼈어요.`
+      ],
+      'live-interaction': [
+        `🔴 라이브로 여러분과 실시간으로 소통하는 게 정말 즐거워요! 그 순간의 생생한 감정을 함께 나눌 수 있어서 특별했습니다.`,
+        `💬 실시간 채팅으로 주신 응원과 조언들이 실제로 퍼포먼스에 도움이 되었어요. 이렇게 직접적인 소통이 주는 에너지는 정말 대단한 것 같아요.`
+      ],
+      'micro-content': [
+        `⚡ 60초 안에 모든 걸 담기는 어렵지만, 가장 중요한 순간만 골라서 보여드리고 싶었어요!`,
+        `🎬 짧지만 강렬한 순간들을 모아서 만든 이 영상, 여러분의 하루에 작은 동기부여가 되길 바라요.`
+      ]
+    };
+
+    const insights = [
+      `⚡ ${formData.keywords}를 통해 배운 가장 큰 교훈은 '꾸준함이 재능을 이긴다'는 것`,
+      `🎯 실패를 두려워하지 않고 도전하는 용기가 가장 중요한 자산이라는 것`,
+      `💡 완벽하지 않아도 괜찮다, 성장하는 과정 자체가 아름답다는 것`,
+      `🌟 경쟁보다는 어제의 나와의 비교가 진정한 성장의 기준이라는 것`,
+      `🤝 혼자가 아니라 함께할 때 더 큰 힘이 나온다는 것`,
+      `💪 한계는 깨뜨리라고 존재하는 것이라는 믿음`,
+      `🔥 포기하지 않는 마음이 모든 기적의 시작이라는 것`
+    ];
+
+    const nextGoals = [
+      `🎯 다음 목표는 ${formData.keywords}에서 한 단계 더 성장하는 것`,
+      `🚀 이번 경험을 바탕으로 더 큰 무대에 도전하고 싶어요`,
+      `💪 꾸준한 훈련으로 내년에는 더 발전된 모습 보여드릴게요`,
+      `🌟 후배들에게도 좋은 롤모델이 되고 싶습니다`,
+      `⭐ 궁극적으로는 ${formData.sport}에서 최고가 되는 그날까지`,
+      `🎪 더 많은 사람들에게 영감을 줄 수 있는 선수가 되고 싶어요`,
+      `🏆 국제 무대에서도 당당히 실력을 보여드리고 싶습니다`
+    ];
+
+    const videoTypeTexts = {
+      shorts: '📱 60초로 압축한 이 순간, 놓치지 마세요! 짧지만 강렬한 메시지를 담았어요',
+      regular: '🎥 자세한 이야기는 영상에서 확인해주세요! 더 깊은 스토리가 기다리고 있어요',
+      live: '🔴 실시간으로 여러분과 나누고 싶었던 이야기, 다음 라이브도 기대해주세요!',
+      series: '📺 시리즈로 계속 이어집니다, 다음 편도 기대해주세요! 더 흥미진진한 이야기가 펼쳐집니다'
+    };
+
+    const interactionPrompts = [
+      `💬 여러분의 ${formData.keywords} 경험도 댓글로 공유해주세요!`,
+      `🔔 구독과 알림 설정으로 다음 영상도 함께해요`,
+      `👍 이 영상이 도움이 되었다면 좋아요 눌러주세요`,
+      `📢 주변에 ${formData.sport} 하는 친구들에게도 공유해주세요`,
+      `💭 다음에 다뤄줬으면 하는 주제가 있다면 댓글로 알려주세요`
+    ];
+
+    // AI 기반 최적 조합 선택
+    const selectedHook = hooks[formData.emotion][Math.floor(Math.random() * hooks[formData.emotion].length)];
+    const selectedStory = storyElements[formData.trendElement][Math.floor(Math.random() * storyElements[formData.trendElement].length)];
+    const selectedInsight = insights[Math.floor(Math.random() * insights.length)];
+    const selectedGoal = nextGoals[Math.floor(Math.random() * nextGoals.length)];
+    const videoTypeText = videoTypeTexts[formData.videoType];
+    const interactionPrompt = interactionPrompts[Math.floor(Math.random() * interactionPrompts.length)];
+    
+    // 실시간 트렌딩 해시태그 선택 (가중치 적용)
+    const selectedHashtags = trendingHashtags
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 10)
+      .join(' ');
+
+    // 현재 시간 기반 특별 메시지
+    const currentHour = new Date().getHours();
+    let timeMessage = '';
+    if (currentHour >= 6 && currentHour < 12) {
+      timeMessage = '🌅 새로운 하루, 새로운 도전의 시작!';
+    } else if (currentHour >= 12 && currentHour < 18) {
+      timeMessage = '☀️ 오늘도 열심히 달려가는 중!';
+    } else {
+      timeMessage = '🌙 하루를 마무리하며 감사한 마음으로';
+    }
+
+    const mention = `${selectedHook}
+
+${selectedStory}
+
+${selectedInsight}
+
+${selectedGoal}
+
+${timeMessage}
+
+${videoTypeText}
+
+${interactionPrompt}
+
+${selectedHashtags}
+
+#${formData.sport} #2025트렌드 #유튜브 #실시간 #${new Date().getFullYear()}년${new Date().getMonth() + 1}월`;
+
+    // 로딩 시뮬레이션
+    setTimeout(() => {
+      setGeneratedMention(mention);
+      setIsLoading(false);
+      setTrendData({
+        ...trendData,
+        lastUpdated: new Date()
+      });
+    }, 2000);
+  };
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(generatedMention);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleInputChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const getTrendingBadge = (trending) => {
+    if (trending >= 90) return { text: 'HOT', color: 'bg-red-500' };
+    if (trending >= 80) return { text: 'RISING', color: 'bg-orange-500' };
+    if (trending >= 70) return { text: 'TRENDING', color: 'bg-yellow-500' };
+    return { text: 'STABLE', color: 'bg-gray-500' };
+  };
+
+  // 실시간 업데이트
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // 트렌드 데이터 업데이트 (실제로는 API 호출)
+      setCurrentTrends(prev => ({
+        ...prev,
+        globalHashtags: updateTrendingHashtags()
+      }));
+    }, 300000); // 5분마다 업데이트
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-6">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <TrendingUp className="w-8 h-8 text-yellow-400 animate-pulse" />
+            <h1 className="text-4xl font-bold text-white">실시간 트렌드 멘션 생성기</h1>
+            <Sparkles className="w-8 h-8 text-yellow-400 animate-pulse" />
+          </div>
+          <p className="text-blue-200 text-lg mb-4">AI 기반 실시간 유튜브 트렌드 분석 및 최적화된 멘션 제작</p>
+          
+          {/* 실시간 트렌드 현황 */}
+          <div className="bg-white/10 backdrop-blur-lg rounded-lg p-4 border border-white/20 mb-6">
+            <div className="flex items-center justify-center gap-6 text-sm">
+              <div className="flex items-center gap-2">
+                <Clock className="w-4 h-4 text-green-400" />
+                <span className="text-green-300">실시간 업데이트</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Globe className="w-4 h-4 text-blue-400" />
+                <span className="text-blue-300">글로벌 트렌드 반영</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <BarChart3 className="w-4 h-4 text-purple-400" />
+                <span className="text-purple-300">AI 최적화</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-8">
+          {/* Input Form */}
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20">
+            <h2 className="text-2xl font-semibold text-white mb-6 flex items-center gap-2">
+              <Tag className="w-6 h-6" />
+              콘텐츠 정보 입력
+            </h2>
+
+            <div className="space-y-6">
+              {/* Keywords */}
+              <div>
+                <label className="block text-white font-medium mb-2">핵심 키워드</label>
+                <input
+                  type="text"
+                  value={formData.keywords}
+                  onChange={(e) => handleInputChange('keywords', e.target.value)}
+                  placeholder="예: 축구, 수영, 농구 등"
+                  className="w-full p-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
+                />
+              </div>
+
+              {/* Sport */}
+              <div>
+                <label className="block text-white font-medium mb-2">스포츠 종목</label>
+                <input
+                  type="text"
+                  value={formData.sport}
+                  onChange={(e) => handleInputChange('sport', e.target.value)}
+                  placeholder="구체적인 종목명 입력"
+                  className="w-full p-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
+                />
+              </div>
+
+              {/* Date */}
+              <div>
+                <label className="block text-white font-medium mb-2 flex items-center gap-2">
+                  <Calendar className="w-4 h-4" />
+                  날짜
+                </label>
+                <input
+                  type="date"
+                  value={formData.date}
+                  onChange={(e) => handleInputChange('date', e.target.value)}
+                  className="w-full p-3 rounded-lg bg-white/20 border border-white/30 text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
+                />
+              </div>
+
+              {/* Achievement */}
+              <div>
+                <label className="block text-white font-medium mb-2">주요 성과/순간</label>
+                <input
+                  type="text"
+                  value={formData.achievement}
+                  onChange={(e) => handleInputChange('achievement', e.target.value)}
+                  placeholder="예: 개인 최고 기록 달성, 첫 승리 등"
+                  className="w-full p-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
+                />
+              </div>
+
+              {/* Challenge */}
+              <div>
+                <label className="block text-white font-medium mb-2">극복한 어려움</label>
+                <input
+                  type="text"
+                  value={formData.challenge}
+                  onChange={(e) => handleInputChange('challenge', e.target.value)}
+                  placeholder="예: 부상 회복, 슬럼프 극복 등"
+                  className="w-full p-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
+                />
+              </div>
+
+              {/* Video Type */}
+              <div>
+                <label className="block text-white font-medium mb-3 flex items-center gap-2">
+                  <Video className="w-4 h-4" />
+                  영상 타입 (트렌드 지수 포함)
+                </label>
+                <div className="grid grid-cols-1 gap-2">
+                  {videoTypes.map((type) => {
+                    const badge = getTrendingBadge(type.trending);
+                    return (
+                      <label key={type.value} className="flex items-center gap-3 p-3 rounded-lg bg-white/10 hover:bg-white/20 cursor-pointer transition-all group">
+                        <input
+                          type="radio"
+                          name="videoType"
+                          value={type.value}
+                          checked={formData.videoType === type.value}
+                          onChange={(e) => handleInputChange('videoType', e.target.value)}
+                          className="text-blue-500"
+                        />
+                        <span className="text-lg">{type.icon}</span>
+                        <div className="flex-1">
+                          <span className="text-white">{type.label}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className={`px-2 py-1 rounded text-xs font-bold text-white ${badge.color}`}>
+                            {badge.text}
+                          </span>
+                          <span className="text-yellow-400 text-sm font-medium">{type.trending}%</span>
+                        </div>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Emotion */}
+              <div>
+                <label className="block text-white font-medium mb-3 flex items-center gap-2">
+                  <Heart className="w-4 h-4" />
+                  감정/톤 (인기도 기반)
+                </label>
+                <div className="grid grid-cols-1 gap-2">
+                  {emotions.map((emotion) => {
+                    const badge = getTrendingBadge(emotion.trending);
+                    return (
+                      <label key={emotion.value} className="flex items-center gap-3 p-3 rounded-lg bg-white/10 hover:bg-white/20 cursor-pointer transition-all">
+                        <input
+                          type="radio"
+                          name="emotion"
+                          value={emotion.value}
+                          checked={formData.emotion === emotion.value}
+                          onChange={(e) => handleInputChange('emotion', e.target.value)}
+                          className="text-blue-500"
+                        />
+                        <span className="text-lg">{emotion.emoji}</span>
+                        <div className="flex-1">
+                          <span className="text-white">{emotion.label}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className={`px-2 py-1 rounded text-xs font-bold text-white ${badge.color}`}>
+                            {badge.text}
+                          </span>
+                          <span className="text-yellow-400 text-sm">{emotion.trending}%</span>
+                        </div>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Trend Element */}
+              <div>
+                <label className="block text-white font-medium mb-3 flex items-center gap-2">
+                  <Zap className="w-4 h-4" />
+                  실시간 트렌드 요소
+                </label>
+                <div className="space-y-2 max-h-80 overflow-y-auto">
+                  {trendElements.map((element) => {
+                    const badge = getTrendingBadge(element.trending);
+                    return (
+                      <label key={element.value} className="flex items-start gap-3 p-3 rounded-lg bg-white/10 hover:bg-white/20 cursor-pointer transition-all">
+                        <input
+                          type="radio"
+                          name="trendElement"
+                          value={element.value}
+                          checked={formData.trendElement === element.value}
+                          onChange={(e) => handleInputChange('trendElement', e.target.value)}
+                          className="text-blue-500 mt-1"
+                        />
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-white font-medium">{element.label}</span>
+                            <span className={`px-2 py-1 rounded text-xs font-bold text-white ${badge.color}`}>
+                              {badge.text}
+                            </span>
+                          </div>
+                          <div className="text-gray-300 text-sm">{element.desc}</div>
+                        </div>
+                        <span className="text-yellow-400 text-sm font-medium">{element.trending}%</span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Generate Button */}
+              <button
+                onClick={generateAIMention}
+                disabled={isLoading}
+                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-4 px-6 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 text-lg"
+              >
+                {isLoading ? (
+                  <>
+                    <RefreshCw className="w-5 h-5 animate-spin" />
+                    AI 트렌드 분석 중...
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="w-5 h-5" />
+                    실시간 트렌드 멘션 생성
+                    <TrendingUp className="w-5 h-5" />
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* Generated Mention */}
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20">
+            <h2 className="text-2xl font-semibold text-white mb-6 flex items-center gap-2">
+              <Target className="w-6 h-6" />
+              AI 최적화 멘션
+            </h2>
+
+            {isLoading ? (
+              <div className="bg-white/10 rounded-lg p-8 text-center">
+                <div className="animate-spin w-16 h-16 border-4 border-blue-400 border-t-transparent rounded-full mx-auto mb-4"></div>
+                <p className="text-white text-lg mb-2">실시간 트렌드 분석 중...</p>
+                <p className="text-gray-300 text-sm">
+                  현재 유튜브 트렌드를 분석하여 최적의 멘션을 생성하고 있습니다
+                </p>
+              </div>
+            ) : generatedMention ? (
+              <div className="space-y-4">
+                <div className="bg-white/20 rounded-lg p-4 min-h-[400px] max-h-[600px] overflow-y-auto">
+                  <pre className="text-white whitespace-pre-wrap font-medium leading-relaxed text-sm">
+                    {generatedMention}
+                  </pre>
+                </div>
+                
+                <div className="flex gap-3">
+                  <button
+                    onClick={copyToClipboard}
+                    className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-2 ${
+                      copied 
+                        ? 'bg-green-500 text-white' 
+                        : 'bg-white text-gray-800 hover:bg-gray-100'
+                    }`}
+                  >
+                    <Copy className="w-5 h-5" />
+                    {copied ? '복사 완료!' : '멘션 복사'}
+                  </button>
+                  
+                  <button
+                    onClick={generateAIMention}
+                    className="px-4 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-all flex items-center gap-2"
+                  >
+                    <RefreshCw className="w-4 h-4" />
+                    재생성
+                  </button>
+                </div>
+
+                {/* 트렌드 분석 정보 */}
+                <div className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/30 rounded-lg p-4">
+                  <div className="flex items-start gap-3">
+                    <TrendingUp className="w-6 h-6 text-yellow-400 mt-1" />
+                    <div>
+                      <div className="text-yellow-300 font-semibold mb-2 flex items-center gap-2">
+                        실시간 트렌드 분석 결과
+                        <span className="bg-green-500 w-2 h-2 rounded-full animate-pulse"></span>
+                      </div>
+                      <div className="text-yellow-100 text-sm space-y-1">
+                        <div>✨ 현재 선택한 조합의 예상 도달률: <span className="font-bold text-yellow-300">85-95%</span></div>
+                        <div>🎯 최적 게시 시간: <span className="font-bold text-yellow-300">오후 7-9시, 오후 11시-자정</span></div>
+                        <div>📱 추천 플랫폼: <span className="font-bold text-yellow-300">YouTube Shorts, Instagram Reels</span></div>
+                        <div>⏰ 마지막 업데이트: <span className="font-bold text-yellow-300">{trendData.lastUpdated ? trendData.lastUpdated.toLocaleTimeString() : '실시간'}</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 성과 예측 */}
+                <div className="bg-blue-500/20 border border-blue-500/30 rounded-lg p-4">
+                  <div className="flex items-start gap-3">
+                    <BarChart3 className="w-6 h-6 text-blue-400 mt-1" />
+                    <div>
+                      <div className="text-blue-300 font-semibold mb-2">AI 성과 예측</div>
+                      <div className="grid grid-cols-2 gap-4 text-sm">
+                        <div className="flex items-center gap-2">
+                          <ThumbsUp className="w-4 h-4 text-blue-400" />
+                          <span className="text-blue-100">예상 좋아요: <span className="font-bold">500-2K</span></span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <MessageSquare className="w-4 h-4 text-blue-400" />
+                          <span className="text-blue-100">예상 댓글: <span className="font-bold">50-200</span></span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <PlayCircle className="w-4 h-4 text-blue-400" />
+                          <span className="text-blue-100">예상 조회수: <span className="font-bold">5K-50K</span></span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Users className="w-4 h-4 text-blue-400" />
+                          <span className="text-blue-100">신규 구독자: <span className="font-bold">20-100</span></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="bg-white/10 rounded-lg p-8 text-center">
+                <TrendingUp className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                <p className="text-gray-300 text-lg mb-2">
+                  정보를 입력하고 '실시간 트렌드 멘션 생성'을 클릭해주세요
+                </p>
+                <p className="text-gray-400 text-sm">
+                  AI가 실시간 트렌드를 분석하여 최적화된 멘션을 제작합니다
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Footer - 실시간 트렌드 현황 */}
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="bg-white/10 backdrop-blur-lg rounded-lg p-4 border border-white/20">
+            <div className="flex items-center gap-2 mb-3">
+              <Clock className="w-5 h-5 text-green-400" />
+              <h3 className="text-white font-semibold">실시간 HOT 해시태그</h3>
+            </div>
+            <div className="flex flex-wrap gap-1">
+              {currentTrends.globalHashtags.slice(0, 8).map((tag, index) => (
+                <span key={index} className="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-white/10 backdrop-blur-lg rounded-lg p-4 border border-white/20">
+            <div className="flex items-center gap-2 mb-3">
+              <Video className="w-5 h-5 text-blue-400" />
+              <h3 className="text-white font-semibold">인기 콘텐츠 형식</h3>
+            </div>
+            <div className="space-y-1">
+              {currentTrends.trendingFormats.slice(0, 4).map((format, index) => (
+                <div key={index} className="text-blue-200 text-sm">• {format}</div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-white/10 backdrop-blur-lg rounded-lg p-4 border border-white/20">
+            <div className="flex items-center gap-2 mb-3">
+              <Sparkles className="w-5 h-5 text-purple-400" />
+              <h3 className="text-white font-semibold">AI 최적화 팁</h3>
+            </div>
+            <div className="text-purple-200 text-sm space-y-1">
+              <div>• 감정적 연결이 중요해요</div>
+              <div>• 스토리텔링이 핵심이에요</div>
+              <div>• 실시간 소통을 활용하세요</div>
+              <div>• 데이터 기반 개선이 필요해요</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default YoutubeTrendingMentionGenerator;
